@@ -1,10 +1,9 @@
-package io.github.chokity.orderedjobs;
+package io.chokity.orderedjobs;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /**
  * This class provides methods to add jobs to a list
@@ -62,15 +61,12 @@ public class Jobs implements OrderedJobs {
     // find the one job that is not in the list of depending jobs
     // VisibleForTesting
     Character getInitialJob() {
-        List<Character> allDependentJobs = allJobs.stream()
-                .filter(x -> x.getValue() != null)
+        return allJobs.stream()
+                .filter(entry -> entry.getValue() != null)
+                .filter(entry -> allJobs.stream()
+                        .map(Entry::getKey)
+                        .noneMatch(key -> key.equals(entry.getValue())))
                 .map(Entry::getValue)
-                .collect(Collectors.toList());
-        List<Character> allDependingJobs = allJobs.stream()
-                .map(Entry::getKey)
-                .collect(Collectors.toList());
-        return allDependentJobs.stream()
-                .filter(x -> allDependingJobs.stream().noneMatch(y -> y.equals(x)))
                 .findFirst()
                 .orElse(null);
     }

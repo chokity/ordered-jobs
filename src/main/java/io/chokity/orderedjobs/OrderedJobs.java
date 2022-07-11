@@ -1,4 +1,4 @@
-package io.github.chokity.orderedjobs;
+package io.chokity.orderedjobs;
 
 public interface OrderedJobs {
     void register(char job);

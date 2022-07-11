@@ -1,6 +1,5 @@
-package io.github.chokity.orderedjobs;
+package io.chokity.orderedjobs;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -55,7 +54,7 @@ class JobsTest {
         jobs.register('b', 'a');
 
         // When
-        Assertions.assertEquals('a', jobs.getInitialJob());
+        assertEquals('a', jobs.getInitialJob());
     }
 
     @Test
